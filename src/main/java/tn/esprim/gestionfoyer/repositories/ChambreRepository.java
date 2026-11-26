@@ -1,0 +1,24 @@
+package tn.esprim.gestionfoyer.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import tn.esprim.gestionfoyer.entities.Chambre;
+import tn.esprim.gestionfoyer.entities.TypeChambre;
+
+import java.util.List;
+
+@Repository
+public interface ChambreRepository extends JpaRepository<Chambre, Long> {
+
+    @Query("SELECT c FROM Chambre c WHERE c.bloc.idBloc= ?1 AND c.typeC=?2")
+
+    List<Chambre> trouverChambreParBlocAndType(long idBloc, TypeChambre typeC);
+
+    List<Chambre> findAllByBlocIdBlocAndTypeC(long idBloc, TypeChambre typeC);
+
+
+    List<Chambre> trouverChambreParNomUniversite(String nomUniversite);
+
+
+}
